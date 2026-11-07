@@ -5,7 +5,7 @@ from typing import Any
 
 from src.config import Config
 from src.llm.gemini_client import GeminiLLM
-from src.rag.document_loader import load_documents, chunk_documents
+from src.rag.document_loader import chunk_documents, load_documents
 from src.rag.vector_store import VectorStore
 from src.tools.function_tools import TOOL_DEFINITIONS, TOOL_MAP
 

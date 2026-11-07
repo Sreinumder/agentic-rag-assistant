@@ -44,7 +44,10 @@ class VectorStore:
 
         texts = [doc.content for doc in documents]
         metadatas = [dict(doc.metadata) for doc in documents]
-        ids = [make_document_id(text, meta) for text, meta in zip(texts, metadatas)]
+        ids = [
+            make_document_id(text, meta)
+            for text, meta in zip(texts, metadatas, strict=True)
+        ]
 
         ids, texts, metadatas = dedupe_by_id(ids, texts, metadatas)
         if not texts:

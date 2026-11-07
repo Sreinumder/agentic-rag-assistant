@@ -15,7 +15,7 @@ PROJECT_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(_
 if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
-from src.config import Config
+from src.config import Config  # noqa: E402 - requires PROJECT_ROOT on sys.path
 
 BACKEND_URL = Config.BACKEND_URL.rstrip("/")
 
@@ -35,7 +35,7 @@ def sidebar():
         try:
             resp = requests.get(f"{BACKEND_URL}/status", timeout=5)
             data = resp.json()
-            st.success(f"✅ Backend online")
+            st.success("✅ Backend online")
             st.write(f"Provider: {data.get('provider')}")
             st.write(f"Model: {data.get('model')}")
             st.write(f"Vector chunks: {data.get('vector_store_chunks')}")

@@ -1,7 +1,8 @@
 from __future__ import annotations
 
 import hashlib
-from typing import Any, Mapping
+from collections.abc import Mapping
+from typing import Any
 
 
 def make_document_id(content: str, metadata: Mapping[str, Any] | None = None) -> str:

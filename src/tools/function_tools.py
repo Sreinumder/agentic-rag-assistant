@@ -4,7 +4,8 @@ import ast
 import datetime
 import math
 import operator
-from typing import Any, Callable
+from collections.abc import Callable
+from typing import Any
 
 # Expressions come from model output, so they are treated as untrusted input.
 MAX_EXPRESSION_LENGTH = 500

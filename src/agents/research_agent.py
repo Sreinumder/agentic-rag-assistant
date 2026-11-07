@@ -367,8 +367,8 @@ class ResearchSession:
             payload = {"error": "malformed_retrieval_payload", "results": []}
             return self._record_search_note(
                 query, top_k, payload, note_text=(
-                    f"search failed: malformed retrieval payload returned by the store "
-                    f"(no usable results). Treat as no evidence."
+                    "search failed: malformed retrieval payload returned by the store "
+                    "(no usable results). Treat as no evidence."
                 )
             )
 

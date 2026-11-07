@@ -81,7 +81,7 @@ def test_concurrent_access_is_safe() -> None:
             for i in range(200):
                 cache.set(f"p-{worker_id}-{i}", "", 0.3, i)
                 cache.get(f"p-{worker_id}-{i}", "", 0.3)
-                cache.size
+                _ = cache.size
         except BaseException as exc:  # pragma: no cover - failure path
             errors.append(exc)
 

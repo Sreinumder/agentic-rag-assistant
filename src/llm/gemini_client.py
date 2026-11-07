@@ -8,7 +8,6 @@ from google.genai import types
 
 from src.config import Config
 
-
 SYSTEM_PROMPT = Config.SYSTEM_PROMPT
 
 

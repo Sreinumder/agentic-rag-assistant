@@ -60,7 +60,6 @@ def run_case(qmeta: dict[str, Any], vector_store: Any, pace: float) -> dict[str,
         pace_seconds=pace,
     )
     t0 = time.time()
-    error: str | None = None
     try:
         result = session.simulate({})
         clarifications = 0
@@ -71,7 +70,6 @@ def run_case(qmeta: dict[str, Any], vector_store: Any, pace: float) -> dict[str,
             reply = qmeta.get("clarification_reply", "use precision 0.6 and recall 0.4")
             result = session.continue_with_reply(reply)
     except Exception as exc:  # noqa: BLE001 - the harness must capture hard failures
-        error = f"{type(exc).__name__}: {exc}"
         result = {
             "query": qmeta["query"],
             "status": "error",

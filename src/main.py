@@ -8,8 +8,8 @@ from rich.markdown import Markdown
 from rich.panel import Panel
 from rich.prompt import Prompt
 
-from src.assistant import AIAssistant
 from src.agents.research_agent import ResearchSession
+from src.assistant import AIAssistant
 
 console = Console()
 
