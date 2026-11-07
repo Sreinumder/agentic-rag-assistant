@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import logging
 from contextlib import asynccontextmanager
+from typing import Any
 
 from fastapi import FastAPI, HTTPException
 from fastapi.middleware.cors import CORSMiddleware
@@ -9,7 +10,7 @@ from pydantic import BaseModel, Field
 
 from src.config import Config
 from src.prod.cache import TTLCache
-from src.prod.llm_service import LLMService, AllProvidersFailedError, RateLimitExceededError
+from src.prod.llm_service import AllProvidersFailedError, LLMService, RateLimitExceededError
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -197,10 +198,12 @@ async def chat(request: ChatRequest):
         )
     except RateLimitExceededError as e:
         logger.error("Rate limited: %s", e)
-        raise HTTPException(status_code=429, detail="Too many requests. Please wait and retry.")
+        raise HTTPException(
+            status_code=429, detail="Too many requests. Please wait and retry."
+        ) from e
     except AllProvidersFailedError as e:
         logger.error("Generation failed: %s", e)
-        raise HTTPException(status_code=503, detail="All AI providers unavailable")
+        raise HTTPException(status_code=503, detail="All AI providers unavailable") from e
 
     if request.use_cache:
         app_state.cache.set(request.message, context, temperature, result)
@@ -274,7 +277,7 @@ async def research(request: ResearchRequest):
 @app.post("/ingest", tags=["rag"])
 async def ingest(request: IngestionRequest):
     """Ingest documents into the RAG knowledge base."""
-    from src.rag.document_loader import load_documents, chunk_documents
+    from src.rag.document_loader import chunk_documents, load_documents
     from src.rag.vector_store import VectorStore
 
     try:
@@ -286,6 +289,6 @@ async def ingest(request: IngestionRequest):
         app_state._rag_disabled = False
         return {"ingested": count, "source": request.source}
     except FileNotFoundError as e:
-        raise HTTPException(status_code=404, detail=str(e))
+        raise HTTPException(status_code=404, detail=str(e)) from e
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Ingestion failed: {e}")
+        raise HTTPException(status_code=500, detail=f"Ingestion failed: {e}") from e
