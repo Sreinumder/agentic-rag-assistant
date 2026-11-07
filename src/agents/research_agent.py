@@ -4,12 +4,14 @@ import json
 import re
 import time
 from pathlib import Path
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from src.config import Config
-from src.llm.gemini_client import GeminiLLM
-from src.rag.vector_store import VectorStore
 from src.tools.function_tools import calculate_expression, get_current_datetime
+
+if TYPE_CHECKING:
+    from src.llm.gemini_client import GeminiLLM
+    from src.rag.vector_store import VectorStore
 
 SKILL_FILE = Path(__file__).parent / "research_skill.md"
 
@@ -113,8 +115,8 @@ class ResearchSession:
         pace_seconds: float | None = None,
     ):
         self.query = query
-        self.vector_store = vector_store or VectorStore()
-        self.llm = llm or GeminiLLM()
+        self.vector_store = vector_store if vector_store is not None else self._make_store()
+        self.llm = llm if llm is not None else self._make_llm()
         self.model = model or (Config.AGENT_MODEL or Config.GEMINI_MODEL)
         self.pace_seconds = (
             Config.AGENT_PACE_SECONDS if pace_seconds is None else pace_seconds
@@ -151,6 +153,22 @@ class ResearchSession:
         self._awaiting_reply = False
         self._did_clarify = False
         self._finalized: dict[str, Any] | None = None
+
+    # --------------------------------------------------------------- factories
+
+    @staticmethod
+    def _make_store() -> VectorStore:
+        # Deferred import keeps the agent testable with fakes and avoids loading
+        # ChromaDB/Google SDKs when they are not needed.
+        from src.rag.vector_store import VectorStore as _VectorStore
+
+        return _VectorStore()
+
+    @staticmethod
+    def _make_llm() -> GeminiLLM:
+        from src.llm.gemini_client import GeminiLLM as _GeminiLLM
+
+        return _GeminiLLM()
 
     # ------------------------------------------------------------- simulation
 

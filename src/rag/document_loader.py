@@ -1,8 +1,6 @@
 from __future__ import annotations
 
-import os
 from pathlib import Path
-from langchain_text_splitters import RecursiveCharacterTextSplitter
 
 from src.config import Config
 
@@ -43,6 +41,10 @@ def load_documents(source: str | Path) -> list[Document]:
 
 
 def chunk_documents(documents: list[Document]) -> list[Document]:
+    # Imported lazily: file loading and Document construction stay usable in
+    # environments where the optional chunking dependency is absent.
+    from langchain_text_splitters import RecursiveCharacterTextSplitter
+
     splitter = RecursiveCharacterTextSplitter(
         chunk_size=Config.CHUNK_SIZE,
         chunk_overlap=Config.CHUNK_OVERLAP,

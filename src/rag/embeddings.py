@@ -1,7 +1,5 @@
 from __future__ import annotations
 
-from google import genai
-
 from src.config import Config
 
 _client = None
@@ -10,6 +8,10 @@ _client = None
 def _get_client():
     global _client
     if _client is None:
+        # Imported lazily so utilities and tests that only need chunking or
+        # retrieval logic do not require the Google SDK.
+        from google import genai
+
         _client = genai.Client(api_key=Config.GEMINI_API_KEY)
     return _client
 
