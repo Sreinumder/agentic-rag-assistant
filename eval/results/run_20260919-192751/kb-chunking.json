@@ -1,0 +1,67 @@
+{
+  "query": "Why is chunk overlap used in the RAG pipeline?",
+  "status": "finalized",
+  "clarified": false,
+  "pending_question": null,
+  "answer": "Chunk overlap is used in the RAG pipeline to maintain context across split text chunks (typically using an overlap of 10-20% of the chunk size).",
+  "confidence": "high",
+  "sources": [
+    "docs/rag_guide.md"
+  ],
+  "steps": 2,
+  "max_steps": 5,
+  "evidence_relevant": true,
+  "degraded": false,
+  "tool_calls": [
+    {
+      "step": 1,
+      "action": "search_knowledge_base",
+      "args": {
+        "query": "chunk overlap RAG pipeline",
+        "top_k": 3
+      },
+      "status": "ok",
+      "output_summary": "[search] q=\"chunk overlap RAG pipeline\" | RELEVANT x1 / MARGINAL x0 | best d=0.285 (docs/rag_guide.md) | excerpt: # RAG Architecture Guide  ## What is RAG? Retrieval-Augmented Generation (RAG) combine"
+    },
+    {
+      "step": 2,
+      "action": "finalize",
+      "args": {
+        "answer": "Chunk overlap is used in the RAG pipeline to maintain context across split text chunks (typically using an overlap of 10-20% of the chunk size).",
+        "confidence": "high",
+        "sources": [
+          "docs/rag_guide.md"
+        ]
+      },
+      "status": "final",
+      "output_summary": "finalize (high): Chunk overlap is used in the RAG pipeline to maintain context across split text chunks (typically using an overlap of 10"
+    }
+  ],
+  "notes": [
+    {
+      "step": 1,
+      "label": "search",
+      "detail": "[search] q=\"chunk overlap RAG pipeline\" | RELEVANT x1 / MARGINAL x0 | best d=0.285 (docs/rag_guide.md) | excerpt: # RAG Architecture Guide  ## What is RAG? Retrieval-Augmented Generation (RAG) combines information retrieval with text generation. It grounds LLM responses in factual, retrieved documents.  ## RAG Pipeline Components  ### 1. Document Ingestion - Load documents from various sources (PDF, TXT, MD, etc.) - Extract text content - Clean and normalize text  ### 2. Chunking - Split documents into smaller, overlapping chunks - Typical chunk size: 256-1024 tokens - Overlap: 10-20% of chunk size to maintain context",
+      "sources": [
+        "docs/rag_guide.md"
+      ]
+    }
+  ],
+  "failures": [],
+  "tokens": {
+    "prompt_tokens": 1479,
+    "candidates_tokens": 137,
+    "total_tokens": 1616
+  },
+  "estimated_cost_usd": 0.002363,
+  "wall_seconds": 15.54,
+  "query_id": "kb-chunking",
+  "tool_correct": true,
+  "tool_problems": [],
+  "pass": true,
+  "reasons": [
+    "ok"
+  ],
+  "category": "kb_factual",
+  "failure_class": "none"
+}

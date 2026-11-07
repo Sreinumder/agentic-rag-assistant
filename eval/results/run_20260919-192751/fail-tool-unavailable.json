@@ -1,0 +1,62 @@
+{
+  "query": "What is supervised learning?",
+  "status": "finalized",
+  "clarified": false,
+  "pending_question": null,
+  "answer": "Supervised learning is a type of machine learning where an algorithm is trained on labeled data\u2014meaning each training example is paired with an output target or label. The model learns to map inputs to the correct outputs and can then make predictions on unseen data. Common examples include classification and regression tasks.",
+  "confidence": "low",
+  "sources": [],
+  "steps": 2,
+  "max_steps": 5,
+  "evidence_relevant": false,
+  "degraded": false,
+  "tool_calls": [
+    {
+      "step": 1,
+      "action": "search_knowledge_base",
+      "args": {
+        "query": "supervised learning definition"
+      },
+      "status": "error",
+      "output_summary": "[error] search_knowledge_base failed: tool unavailable (simulated outage): the knowledge base service is down"
+    },
+    {
+      "step": 2,
+      "action": "finalize",
+      "args": {
+        "answer": "Supervised learning is a type of machine learning where an algorithm is trained on labeled data\u2014meaning each training example is paired with an output target or label. The model learns to map inputs to the correct outputs and can then make predictions on unseen data. Common examples include classification and regression tasks.",
+        "confidence": "low",
+        "sources": []
+      },
+      "status": "final",
+      "output_summary": "finalize (low): Supervised learning is a type of machine learning where an algorithm is trained on labeled data\u2014meaning each training ex"
+    }
+  ],
+  "notes": [
+    {
+      "step": 1,
+      "label": "error",
+      "detail": "[error] search_knowledge_base failed: tool unavailable (simulated outage): the knowledge base service is down",
+      "sources": []
+    }
+  ],
+  "failures": [
+    "tool_error_search_knowledge_base"
+  ],
+  "tokens": {
+    "prompt_tokens": 1278,
+    "candidates_tokens": 178,
+    "total_tokens": 1456
+  },
+  "estimated_cost_usd": 0.002265,
+  "wall_seconds": 11.86,
+  "query_id": "fail-tool-unavailable",
+  "tool_correct": true,
+  "tool_problems": [],
+  "pass": true,
+  "reasons": [
+    "ok"
+  ],
+  "category": "injected_tool_failure",
+  "failure_class": "none"
+}

@@ -1,0 +1,20 @@
+{
+  "total_queries": 9,
+  "passed": 9,
+  "completion_rate": 1.0,
+  "tool_correct": 1.0,
+  "steps_avg": 2.89,
+  "steps_min": 2,
+  "steps_max": 5,
+  "tokens_total": 23610,
+  "tokens_prompt": 21188,
+  "tokens_candidates": 2422,
+  "cost_estimate_usd": 0.0356,
+  "wall_seconds_total": 169.1,
+  "failure_classes": {
+    "hard": 0,
+    "soft": 1,
+    "cascading": 0,
+    "none": 8
+  }
+}

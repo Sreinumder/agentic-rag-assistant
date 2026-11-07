@@ -1,0 +1,46 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.backend
+    container_name: ai-assistant-backend
+    ports:
+      - "8000:8000"
+    environment:
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - GEMINI_MODEL=${GEMINI_MODEL:-gemini-3.6-flash}
+      - GEMINI_FALLBACK_MODEL=${GEMINI_FALLBACK_MODEL:-gemini-3.5-flash-lite}
+      - CHUNK_SIZE=${CHUNK_SIZE:-512}
+      - CHUNK_OVERLAP=${CHUNK_OVERLAP:-64}
+      - TOP_K=${TOP_K:-5}
+      - TEMPERATURE=${TEMPERATURE:-0.3}
+      - TOP_P=${TOP_P:-0.9}
+      - MAX_OUTPUT_TOKENS=${MAX_OUTPUT_TOKENS:-2048}
+      - MAX_RETRIES=${MAX_RETRIES:-3}
+      - RETRY_DELAY=${RETRY_DELAY:-1.0}
+      - RATE_LIMIT_RPM=${RATE_LIMIT_RPM:-60}
+      - CACHE_TTL=${CACHE_TTL:-300.0}
+      - CACHE_MAX_SIZE=${CACHE_MAX_SIZE:-1000}
+    volumes:
+      - ./chroma_db:/app/chroma_db
+      - ./docs:/app/docs
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+
+  ui:
+    build:
+      context: .
+      dockerfile: Dockerfile.ui
+    container_name: ai-assistant-ui
+    ports:
+      - "8501:8501"
+    environment:
+      - BACKEND_URL=http://backend:8000
+    depends_on:
+      - backend
+
+volumes:
+  chroma_db:

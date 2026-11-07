@@ -1,0 +1,67 @@
+{
+  "query": "What is supervised learning?",
+  "status": "finalized",
+  "clarified": false,
+  "pending_question": null,
+  "answer": "Supervised learning is a type of machine learning where the model learns from labeled training data. It is primarily divided into two categories:\n1. **Classification**: Predicting discrete labels (e.g., spam vs. not spam).\n2. **Regression**: Predicting continuous values (e.g., house prices).",
+  "confidence": "high",
+  "sources": [
+    "docs/ml_basics.md"
+  ],
+  "steps": 2,
+  "max_steps": 5,
+  "evidence_relevant": true,
+  "degraded": false,
+  "tool_calls": [
+    {
+      "step": 1,
+      "action": "search_knowledge_base",
+      "args": {
+        "query": "supervised learning definition",
+        "top_k": 3
+      },
+      "status": "ok",
+      "output_summary": "[search] q=\"supervised learning definition\" | RELEVANT x1 / MARGINAL x0 | best d=0.319 (docs/ml_basics.md) | excerpt: # Machine Learning Fundamentals  ## What is Machine Learning? Machine Learning (ML"
+    },
+    {
+      "step": 2,
+      "action": "finalize",
+      "args": {
+        "answer": "Supervised learning is a type of machine learning where the model learns from labeled training data. It is primarily divided into two categories:\n1. **Classification**: Predicting discrete labels (e.g., spam vs. not spam).\n2. **Regression**: Predicting continuous values (e.g., house prices).",
+        "confidence": "high",
+        "sources": [
+          "docs/ml_basics.md"
+        ]
+      },
+      "status": "final",
+      "output_summary": "finalize (high): Supervised learning is a type of machine learning where the model learns from labeled training data. It is primarily div"
+    }
+  ],
+  "notes": [
+    {
+      "step": 1,
+      "label": "search",
+      "detail": "[search] q=\"supervised learning definition\" | RELEVANT x1 / MARGINAL x0 | best d=0.319 (docs/ml_basics.md) | excerpt: # Machine Learning Fundamentals  ## What is Machine Learning? Machine Learning (ML) is a subset of artificial intelligence that enables systems to learn from data and improve their performance without being explicitly programmed.  ## Types of Machine Learning  ### Supervised Learning The model learns from labeled training data: - **Classification**: Predicting discrete labels (e.g., spam vs not spam) - **Regression**: Predicting continuous values (e.g., house prices)",
+      "sources": [
+        "docs/ml_basics.md"
+      ]
+    }
+  ],
+  "failures": [],
+  "tokens": {
+    "prompt_tokens": 1420,
+    "candidates_tokens": 198,
+    "total_tokens": 1618
+  },
+  "estimated_cost_usd": 0.002517,
+  "wall_seconds": 12.81,
+  "query_id": "kb-supervised",
+  "tool_correct": true,
+  "tool_problems": [],
+  "pass": true,
+  "reasons": [
+    "ok"
+  ],
+  "category": "kb_factual",
+  "failure_class": "none"
+}

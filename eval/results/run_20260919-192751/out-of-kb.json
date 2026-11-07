@@ -1,0 +1,86 @@
+{
+  "query": "What is the capital of France?",
+  "status": "finalized",
+  "clarified": false,
+  "pending_question": null,
+  "answer": "The capital of France is Paris. (Note: Although the knowledge base retrieved Python documentation and did not contain a direct document about France, this is a universally known geographical fact.)",
+  "confidence": "low",
+  "sources": [],
+  "steps": 3,
+  "max_steps": 5,
+  "evidence_relevant": false,
+  "degraded": true,
+  "tool_calls": [
+    {
+      "step": 1,
+      "action": "search_knowledge_base",
+      "args": {
+        "query": "capital of France",
+        "top_k": 3
+      },
+      "status": "ok",
+      "output_summary": "[search] q=\"capital of France\" | RELEVANT x0 / MARGINAL x1 | best d=0.518 (docs/python_guide.md) | excerpt: # Python Programming Guide  ## Overview Python is a high-level, interpreted programming lang"
+    },
+    {
+      "step": 2,
+      "action": "search_knowledge_base",
+      "args": {
+        "query": "capital of France Paris geography",
+        "top_k": 3
+      },
+      "status": "ok",
+      "output_summary": "[search] q=\"capital of France Paris geography\" | RELEVANT x0 / MARGINAL x1 | best d=0.538 (docs/python_guide.md) | excerpt: # Python Programming Guide  ## Overview Python is a high-level, interpreted "
+    },
+    {
+      "step": 3,
+      "action": "finalize",
+      "args": {
+        "answer": "The capital of France is Paris. (Note: Although the knowledge base retrieved Python documentation and did not contain a direct document about France, this is a universally known geographical fact.)",
+        "confidence": "low",
+        "sources": []
+      },
+      "status": "final",
+      "output_summary": "finalize (low): The capital of France is Paris. (Note: Although the knowledge base retrieved Python documentation and did not contain a "
+    }
+  ],
+  "notes": [
+    {
+      "step": 1,
+      "label": "search",
+      "detail": "[search] q=\"capital of France\" | RELEVANT x0 / MARGINAL x1 | best d=0.518 (docs/python_guide.md) | excerpt: # Python Programming Guide  ## Overview Python is a high-level, interpreted programming language known for its simplicity and readability. It was created by Guido van Rossum and first released in 1991.  ## Key Features - **Dynamic typing**: Variables don't need explicit type declarations - **Indentation-based syntax**: Uses whitespace to define code blocks - **Extensive standard library**: \"Batteries included\" philosophy - **Multiple paradigms**: Supports OOP, functional, and procedural programming",
+      "sources": [
+        "docs/python_guide.md",
+        "docs/rag_guide.md"
+      ]
+    },
+    {
+      "step": 2,
+      "label": "search",
+      "detail": "[search] q=\"capital of France Paris geography\" | RELEVANT x0 / MARGINAL x1 | best d=0.538 (docs/python_guide.md) | excerpt: # Python Programming Guide  ## Overview Python is a high-level, interpreted programming language known for its simplicity and readability. It was created by Guido van Rossum and first released in 1991.  ## Key Features - **Dynamic typing**: Variables don't need explicit type declarations - **Indentation-based syntax**: Uses whitespace to define code blocks - **Extensive standard library**: \"Batteries included\" philosophy - **Multiple paradigms**: Supports OOP, functional, and procedural programming",
+      "sources": [
+        "docs/python_guide.md",
+        "docs/ml_basics.md",
+        "docs/rag_guide.md"
+      ]
+    }
+  ],
+  "failures": [
+    "confidence_downgraded_unverified"
+  ],
+  "tokens": {
+    "prompt_tokens": 2770,
+    "candidates_tokens": 232,
+    "total_tokens": 3002
+  },
+  "estimated_cost_usd": 0.004333,
+  "wall_seconds": 19.98,
+  "query_id": "out-of-kb",
+  "tool_correct": true,
+  "tool_problems": [],
+  "pass": true,
+  "reasons": [
+    "ok"
+  ],
+  "category": "out_of_kb",
+  "failure_class": "soft"
+}

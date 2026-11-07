@@ -1,0 +1,64 @@
+{
+  "query": "Compute sqrt(16) + pi using the calculator.",
+  "status": "finalized",
+  "clarified": false,
+  "pending_question": null,
+  "answer": "sqrt(16) + pi is approximately 7.141592653589793.",
+  "confidence": "high",
+  "sources": [
+    "calculator"
+  ],
+  "steps": 2,
+  "max_steps": 5,
+  "evidence_relevant": false,
+  "degraded": false,
+  "tool_calls": [
+    {
+      "step": 1,
+      "action": "calculate_expression",
+      "args": {
+        "expression": "sqrt(16) + pi"
+      },
+      "status": "ok",
+      "output_summary": "[calc] sqrt(16) + pi = 7.141592653589793"
+    },
+    {
+      "step": 2,
+      "action": "finalize",
+      "args": {
+        "answer": "sqrt(16) + pi is approximately 7.141592653589793.",
+        "confidence": "high",
+        "sources": [
+          "calculator"
+        ]
+      },
+      "status": "final",
+      "output_summary": "finalize (high): sqrt(16) + pi is approximately 7.141592653589793."
+    }
+  ],
+  "notes": [
+    {
+      "step": 1,
+      "label": "calculate",
+      "detail": "[calc] sqrt(16) + pi = 7.141592653589793",
+      "sources": []
+    }
+  ],
+  "failures": [],
+  "tokens": {
+    "prompt_tokens": 1302,
+    "candidates_tokens": 146,
+    "total_tokens": 1448
+  },
+  "estimated_cost_usd": 0.002175,
+  "wall_seconds": 13.15,
+  "query_id": "math-pure",
+  "tool_correct": true,
+  "tool_problems": [],
+  "pass": true,
+  "reasons": [
+    "ok"
+  ],
+  "category": "math",
+  "failure_class": "none"
+}

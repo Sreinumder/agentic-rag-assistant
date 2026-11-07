@@ -1,0 +1,93 @@
+{
+  "query": "What is RAG?",
+  "status": "finalized",
+  "clarified": false,
+  "pending_question": null,
+  "answer": "Retrieval-Augmented Generation (RAG) is a technique that enhances large language models by retrieving relevant information from an external knowledge base before generating a response. However, because the knowledge base search has failed repeatedly due to technical errors, specific details from the document store are currently unavailable.",
+  "confidence": "low",
+  "sources": [],
+  "steps": 4,
+  "max_steps": 5,
+  "evidence_relevant": false,
+  "degraded": true,
+  "tool_calls": [
+    {
+      "step": 1,
+      "action": "search_knowledge_base",
+      "args": {
+        "query": "RAG",
+        "top_k": 3
+      },
+      "status": "ok",
+      "output_summary": "search failed: malformed retrieval payload returned by the store (no usable results). Treat as no evidence."
+    },
+    {
+      "step": 2,
+      "action": "search_knowledge_base",
+      "args": {
+        "query": "What is RAG retrieval-augmented generation",
+        "top_k": 3
+      },
+      "status": "ok",
+      "output_summary": "search failed: malformed retrieval payload returned by the store (no usable results). Treat as no evidence."
+    },
+    {
+      "step": 3,
+      "action": "search_knowledge_base",
+      "args": {
+        "query": "What is RAG retrieval-augmented generation",
+        "top_k": 3
+      },
+      "status": "ok",
+      "output_summary": "search failed: malformed retrieval payload returned by the store (no usable results). Treat as no evidence."
+    },
+    {
+      "step": 4,
+      "action": "finalize",
+      "args": {
+        "answer": "Retrieval-Augmented Generation (RAG) is a technique that enhances large language models by retrieving relevant information from an external knowledge base before generating a response. However, because the knowledge base search has failed repeatedly due to technical errors, specific details from the document store are currently unavailable.",
+        "confidence": "low",
+        "sources": []
+      },
+      "status": "final",
+      "output_summary": "finalize (low): Retrieval-Augmented Generation (RAG) is a technique that enhances large language models by retrieving relevant informati"
+    }
+  ],
+  "notes": [
+    {
+      "step": 1,
+      "label": "search",
+      "detail": "search failed: malformed retrieval payload returned by the store (no usable results). Treat as no evidence.",
+      "sources": []
+    },
+    {
+      "step": 2,
+      "label": "search",
+      "detail": "search failed: malformed retrieval payload returned by the store (no usable results). Treat as no evidence.",
+      "sources": []
+    },
+    {
+      "step": 3,
+      "label": "search",
+      "detail": "search failed: malformed retrieval payload returned by the store (no usable results). Treat as no evidence.",
+      "sources": []
+    }
+  ],
+  "failures": [],
+  "tokens": {
+    "prompt_tokens": 3399,
+    "candidates_tokens": 327,
+    "total_tokens": 3726
+  },
+  "estimated_cost_usd": 0.005475,
+  "wall_seconds": 26.51,
+  "query_id": "fail-malformed",
+  "tool_correct": true,
+  "tool_problems": [],
+  "pass": true,
+  "reasons": [
+    "ok"
+  ],
+  "category": "injected_malformed_retrieval",
+  "failure_class": "none"
+}

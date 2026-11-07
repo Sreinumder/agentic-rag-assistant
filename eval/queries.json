@@ -1,0 +1,83 @@
+[
+  {
+    "id": "kb-supervised",
+    "category": "kb_factual",
+    "query": "What is supervised learning?",
+    "expected_tools": ["search_knowledge_base", "finalize"],
+    "min_steps": 2,
+    "max_steps": 5,
+    "source": "ml_basics.md"
+  },
+  {
+    "id": "kb-chunking",
+    "category": "kb_factual",
+    "query": "Why is chunk overlap used in the RAG pipeline?",
+    "expected_tools": ["search_knowledge_base", "finalize"],
+    "min_steps": 2,
+    "max_steps": 5,
+    "source": "rag_guide.md"
+  },
+  {
+    "id": "multi-source",
+    "category": "multi_source",
+    "query": "Compare the F1 metric from the ML docs with the embedding and retrieval workflow from the RAG docs.",
+    "expected_tools": ["search_knowledge_base", "finalize"],
+    "min_steps": 3,
+    "max_steps": 5
+  },
+  {
+    "id": "kb-math",
+    "category": "kb_plus_math",
+    "query": "According to the docs, what is the F1 score? Compute it for precision 0.6 and recall 0.4.",
+    "expected_tools": ["search_knowledge_base", "calculate_expression", "finalize"],
+    "min_steps": 2,
+    "max_steps": 6,
+    "source": "ml_basics.md",
+    "numeric": "0.48"
+  },
+  {
+    "id": "math-pure",
+    "category": "math",
+    "query": "Compute sqrt(16) + pi using the calculator.",
+    "expected_tools": ["calculate_expression", "finalize"],
+    "min_steps": 1,
+    "max_steps": 4,
+    "numeric": "7.141"
+  },
+  {
+    "id": "out-of-kb",
+    "category": "out_of_kb",
+    "query": "What is the capital of France?",
+    "expected_tools": ["search_knowledge_base", "finalize"],
+    "min_steps": 1,
+    "max_steps": 4
+  },
+  {
+    "id": "multi-turn",
+    "category": "multi_turn",
+    "query": "Compute the F1 score.",
+    "expected_tools": ["calculate_expression", "finalize"],
+    "min_steps": 2,
+    "max_steps": 6,
+    "numeric": "0.48",
+    "clarification_reply": "precision is 0.6 and recall is 0.4"
+  },
+  {
+    "id": "fail-tool-unavailable",
+    "category": "injected_tool_failure",
+    "query": "What is supervised learning?",
+    "fail_injection": "tool_unavailable",
+    "expected_tools": ["search_knowledge_base", "finalize"],
+    "min_steps": 1,
+    "max_steps": 5
+  },
+  {
+    "id": "fail-malformed",
+    "category": "injected_malformed_retrieval",
+    "query": "What is RAG?",
+    "fail_injection": "malformed_retrieval",
+    "expected_tools": ["search_knowledge_base", "finalize"],
+    "min_steps": 1,
+    "max_steps": 5
+  }
+]
