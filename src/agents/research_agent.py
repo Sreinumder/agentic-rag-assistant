@@ -238,6 +238,7 @@ class ResearchSession:
             if self._parse_retries < MAX_PARSE_RETRIES:
                 self._parse_retries += 1
                 return self._retry_after_parse_error(gen.get("text", ""))
+            self.failures.append("forced_parse_failed")
             self._force_unfinished()
             return "forced_parse_failed"
 
@@ -532,7 +533,9 @@ class ResearchSession:
         memory (e.g. an out-of-KB query)."""
         if self._finalized is None:
             return
-        searched = any(n["label"] == "search" for n in self.notes)
+        searched = any(
+            t.get("action") == "search_knowledge_base" for t in self.transcript
+        )
         if not searched:
             return
         has_relevant = any(
@@ -565,11 +568,14 @@ class ResearchSession:
             "RELEVANT x" in n["detail"] and "RELEVANT x0" not in n["detail"]
             for n in searches
         )
+        attempted_search = any(
+            t.get("action") == "search_knowledge_base" for t in self.transcript
+        )
         # A query that involves knowledge retrieval is "degraded" when the loop
         # gave up or never surfaced relevant evidence (would produce a
         # fabricatable/unverifiable answer). Pure computation/clock queries are
         # not degraded even without KB evidence.
-        retrieval_degraded = bool(searches) and not evidence_ok
+        retrieval_degraded = attempted_search and not evidence_ok
         degraded = "step_limit_reached" in self.failures or retrieval_degraded
         total = self.usage_total
         cost = (
