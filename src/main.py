@@ -10,6 +10,7 @@ from rich.prompt import Prompt
 
 from src.agents.research_agent import ResearchSession
 from src.assistant import AIAssistant
+from src.config import Config
 
 console = Console()
 
@@ -51,9 +52,8 @@ def run_research_agent(assistant: AIAssistant, query: str) -> None:
 
 
 def main():
-    console.print(console)
     console.print(Panel(
-        "[bold cyan]AI Assistant[/bold cyan] powered by Gemini 2.0 Flash\n"
+        f"[bold cyan]AI Assistant[/bold cyan] powered by {Config.GEMINI_MODEL}\n"
         "Commands: [bold]/ingest <path>[/bold] load documents | "
         "[bold]/research <query>[/bold] agentic research loop | "
         "[bold]/structured[/bold] structured output mode | "

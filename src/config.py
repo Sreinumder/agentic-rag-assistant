@@ -21,7 +21,7 @@ class Config:
     TOP_P: float = float(os.getenv("TOP_P", "0.9"))
     MAX_OUTPUT_TOKENS: int = int(os.getenv("MAX_OUTPUT_TOKENS", "2048"))
 
-    # Production settings (Task 2)
+    # Production settings
     MAX_RETRIES: int = int(os.getenv("MAX_RETRIES", "3"))
     RETRY_DELAY: float = float(os.getenv("RETRY_DELAY", "1.0"))
     RATE_LIMIT_RPM: int = int(os.getenv("RATE_LIMIT_RPM", "60"))
@@ -29,7 +29,7 @@ class Config:
     CACHE_MAX_SIZE: int = int(os.getenv("CACHE_MAX_SIZE", "1000"))
     BACKEND_URL: str = os.getenv("BACKEND_URL", "http://localhost:8000")
 
-    # Agentic settings (Task 3 / W16)
+    # Agentic settings
     AGENT_MODEL: str = os.getenv("AGENT_MODEL", "")
     MAX_STEPS: int = int(os.getenv("MAX_STEPS", "5"))
     EVIDENCE_NOTE_MAX_CHARS: int = int(os.getenv("EVIDENCE_NOTE_MAX_CHARS", "800"))
@@ -38,7 +38,7 @@ class Config:
     # Relevance buckets for retrieved chunks (cosine distance, lower = more similar).
     RETRIEVAL_RELEVANT_MAX: float = float(os.getenv("RETRIEVAL_RELEVANT_MAX", "0.42"))
     RETRIEVAL_MARGINAL_MAX: float = float(os.getenv("RETRIEVAL_MARGINAL_MAX", "0.55"))
-    # Failure injection for the W16 evaluation harness:
+    # Failure injection for the evaluation harness:
     #   none | tool_unavailable | malformed_retrieval | max_steps
     FAILURE_INJECTION: str = os.getenv("FAILURE_INJECTION", "none")
     # Minimum seconds between agent LLM calls (free-tier Gemini rate limit pacing).
